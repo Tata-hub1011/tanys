@@ -1,4 +1,6 @@
-#pragma once 
+#ifndef USER_H
+#define USER_H
+
 #include <string>
 #include <vector>
 #include "message.h"
@@ -13,12 +15,13 @@ public:
     bool checkPassword(const std::string& pwd) const;
 
     void receiveMessage(const Message& msg);
-    std::vector<Message> getAndClearInbox(); 
+    std::vector<Message> getAndClearInbox(); // вернуть и очистить входящие
 
 private:
     std::string login_;
-    std::string password_; 
+    std::string password_; // в реальном приложении — хеш
     std::string displayName_;
     std::vector<Message> inbox_;
 };
 
+#endif // USER_H
