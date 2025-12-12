@@ -1,29 +1,25 @@
 #pragma once 
+#include "user.h"
 #include <string>
+#include <vector>
+#include "message.h"
 
-class User
-{
-    std::string _login;
-    std::string _password;
-    std::string _name;
+class User {
 public:
-    User(const std::string& login, const std::string& password, const std::string& name)
-        : _login(login), _password(password), _name(name) {
-    }
+    User() = default;
+    User(const std::string& login, const std::string& password, const std::string& displayName);
 
-    const std::string& get_login() const
-    {
-        return _login;
-    }
+    const std::string& getLogin() const;
+    const std::string& getDisplayName() const;
+    bool checkPassword(const std::string& pwd) const;
 
-    bool check_password(const std::string& pass) const
-    {
-        return _password == pass;
-    }
+    void receiveMessage(const Message& msg);
+    std::vector<Message> getAndClearInbox(); 
 
-    const std::string& get_name() const
-    {
-        return _name;
-    }
+private:
+    std::string login_;
+    std::string password_; 
+    std::string displayName_;
+    std::vector<Message> inbox_;
 };
 
